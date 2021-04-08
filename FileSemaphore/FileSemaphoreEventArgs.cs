@@ -2,29 +2,29 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace System.Threading
-{
+namespace System.Threading {
+    
     /// <summary>
-    /// Contiene le informazioni che hanno fatto scattare il semaforo
+    /// Contains information about filesemaphore unlock event
     /// </summary>
-    public class FileSemaphoreEventArgs : EventArgs
-    {
+    public class FileSemaphoreEventArgs : EventArgs {
+
         /// <summary>
-        /// Contenuto letto dal file semaforo
+        /// Content of the file that has unlocked the semaphore
         /// </summary>
         public string Content { get; set; }
+
         /// <summary>
-        /// Nome del file che ha fatto scattare il semaforo
+        /// Filename that has unlocked the semaphore
         /// </summary>
         public string Filename { get; set; }
 
         /// <summary>
-        /// Costruisce un oggetto FileSemaphoreEventArgs
+        /// Create a FileSemaphoreEventArgs object
         /// </summary>
-        /// <param name="filename">Nome del file che ha fatto scattare il semaforo</param>
-        /// <param name="content">Contenuto letto dal file semaforo</param>
-        public FileSemaphoreEventArgs(string filename, string content)
-        {
+        /// <param name="filename">Filename that has unlocked the semaphore</param>
+        /// <param name="content">Content of the file that has unlocked the semaphore</param>
+        public FileSemaphoreEventArgs (string filename, string content) {
             this.Content = content;
             this.Filename = filename;
         }

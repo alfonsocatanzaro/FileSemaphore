@@ -5,9 +5,9 @@ using System.Text;
 namespace System.Threading
 {
     /// <summary>
-    /// Delegato per lachio evento semaforo
+    /// Delegate usend for firing Unlocked event
     /// </summary>
-    /// <param name="sender">Oggetto che lancia l'evento</param>
-    /// <param name="eventArgs">Contene il Content e il Filename relativo all'evento</param>
+    /// <param name="sender">Object that has fired the event</param>
+    /// <param name="eventArgs">Information about the Unlocked event (filename, content)</param>
     public delegate void FileSemaphoreEventHandler(object sender, FileSemaphoreEventArgs eventArgs);
 }

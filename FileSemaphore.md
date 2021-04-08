@@ -24,30 +24,30 @@ System.Threading
 
 ##### Summary
 
-Consente di creare un semaforo basato su file
+FileSemaphore class allow you to create a process semaphore that unlock on file event.
 
 <a name='M-System-Threading-FileSemaphore-#ctor-System-String,System-String,System-ComponentModel-ISynchronizeInvoke,System-Boolean-'></a>
 ### #ctor(fileName,fileContent,syncObject,deleteFileAfterProcess) `constructor`
 
 ##### Summary
 
-Crea un oggetto FileSemaphore
+Create an FileSemaphore class instance
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| fileName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Nome (completo di percorso) del file da controllare |
-| fileContent | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Contenuto da controllare per far scattare il semaforo; vuoto scatta a qualunque contenuto |
-| syncObject | [System.ComponentModel.ISynchronizeInvoke](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.ISynchronizeInvoke 'System.ComponentModel.ISynchronizeInvoke') | Oggetto per la la syncronizzaione del crossthreading |
-| deleteFileAfterProcess | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Cancella il file semafoto quando processato |
+| fileName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Filename that will be check |
+| fileContent | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | File content that will be match to unlock the semaphore. Empty string allow to unlock the semaphore with any content. |
+| syncObject | [System.ComponentModel.ISynchronizeInvoke](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.ISynchronizeInvoke 'System.ComponentModel.ISynchronizeInvoke') | Object to use to invoke event in threadsafe |
+| deleteFileAfterProcess | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Delete file when semaphore is unlocked |
 
 <a name='M-System-Threading-FileSemaphore-Dispose-System-Boolean-'></a>
 ### Dispose(disposing) `method`
 
 ##### Summary
 
-Dispose dell'oggetto semaforo
+Dispose of the semaphore
 
 ##### Parameters
 
@@ -71,7 +71,7 @@ This method has no parameters.
 
 ##### Summary
 
-Avvio il controllo del semaforo
+Start semaphore checking
 
 ##### Parameters
 
@@ -82,7 +82,7 @@ This method has no parameters.
 
 ##### Summary
 
-Ferma il controllo del semaforo
+Stop semaphore checking
 
 ##### Parameters
 
@@ -97,35 +97,35 @@ System.Threading
 
 ##### Summary
 
-Contiene le informazioni che hanno fatto scattare il semaforo
+Contains information about filesemaphore unlock event
 
 <a name='M-System-Threading-FileSemaphoreEventArgs-#ctor-System-String,System-String-'></a>
 ### #ctor(filename,content) `constructor`
 
 ##### Summary
 
-Costruisce un oggetto FileSemaphoreEventArgs
+Create a FileSemaphoreEventArgs object
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| filename | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Nome del file che ha fatto scattare il semaforo |
-| content | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Contenuto letto dal file semaforo |
+| filename | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Filename that has unlocked the semaphore |
+| content | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Content of the file that has unlocked the semaphore |
 
 <a name='P-System-Threading-FileSemaphoreEventArgs-Content'></a>
 ### Content `property`
 
 ##### Summary
 
-Contenuto letto dal file semaforo
+Content of the file that has unlocked the semaphore
 
 <a name='P-System-Threading-FileSemaphoreEventArgs-Filename'></a>
 ### Filename `property`
 
 ##### Summary
 
-Nome del file che ha fatto scattare il semaforo
+Filename that has unlocked the semaphore
 
 <a name='T-System-Threading-FileSemaphoreEventHandler'></a>
 ## FileSemaphoreEventHandler `type`
@@ -136,10 +136,10 @@ System.Threading
 
 ##### Summary
 
-Delegato per lachio evento semaforo
+Delegate usend for firing Unlocked event
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [T:System.Threading.FileSemaphoreEventHandler](#T-T-System-Threading-FileSemaphoreEventHandler 'T:System.Threading.FileSemaphoreEventHandler') | Oggetto che lancia l'evento |
+| sender | [T:System.Threading.FileSemaphoreEventHandler](#T-T-System-Threading-FileSemaphoreEventHandler 'T:System.Threading.FileSemaphoreEventHandler') | Object that has fired the event |

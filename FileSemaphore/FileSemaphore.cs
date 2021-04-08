@@ -9,7 +9,7 @@ using System.Threading;
 namespace System.Threading
 {
     /// <summary>
-    /// Consente di creare un semaforo basato su file
+    /// FileSemaphore class allow you to create a process semaphore that unlock on file event.
     /// </summary>
     public class FileSemaphore : IDisposable
     {
@@ -25,12 +25,12 @@ namespace System.Threading
         private readonly bool _deleteFileAfterProcess;
 
         /// <summary>
-        /// Crea un oggetto FileSemaphore
+        /// Create an FileSemaphore class instance
         /// </summary>
-        /// <param name="fileName">Nome (completo di percorso) del file da controllare</param>
-        /// <param name="fileContent">Contenuto da controllare per far scattare il semaforo; vuoto scatta a qualunque contenuto</param>
-        /// <param name="syncObject">Oggetto per la la syncronizzaione del crossthreading</param>
-        /// <param name="deleteFileAfterProcess">Cancella il file semafoto quando processato</param>
+        /// <param name="fileName">Filename that will be check</param>
+        /// <param name="fileContent">File content that will be match to unlock the semaphore. Empty string allow to unlock the semaphore with any content.</param>
+        /// <param name="syncObject">Object to use to invoke event in threadsafe</param>
+        /// <param name="deleteFileAfterProcess">Delete file when semaphore is unlocked</param>
         public FileSemaphore(string fileName,
             string fileContent = "",
             ISynchronizeInvoke syncObject = null,
@@ -43,7 +43,7 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Avvio il controllo del semaforo
+        /// Start semaphore checking
         /// </summary>
         public void Start()
         {
@@ -54,7 +54,7 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Ferma il controllo del semaforo
+        /// Stop semaphore checking
         /// </summary>
         public void Stop()
         {
@@ -62,7 +62,7 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Evento che viene lanciato quando le condizioni del semaforo si verificano
+        /// Event that is fire when the semaphore condition is verified
         /// </summary>
         public event FileSemaphoreEventHandler UnLocked;
         private void OnUnLocked(string filename, string content)
@@ -145,7 +145,7 @@ namespace System.Threading
 
         private bool disposedValue;
         /// <summary>
-        /// Dispose dell'oggetto semaforo
+        /// Dispose of the semaphore
         /// </summary>
         /// <param name="disposing"></param>
         protected virtual void Dispose(bool disposing)

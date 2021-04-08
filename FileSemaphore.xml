@@ -6,36 +6,36 @@
     <members>
         <member name="T:System.Threading.FileSemaphore">
             <summary>
-            Consente di creare un semaforo basato su file
+            FileSemaphore class allow you to create a process semaphore that unlock on file event.
             </summary>
         </member>
         <member name="M:System.Threading.FileSemaphore.#ctor(System.String,System.String,System.ComponentModel.ISynchronizeInvoke,System.Boolean)">
             <summary>
-            Crea un oggetto FileSemaphore
+            Create an FileSemaphore class instance
             </summary>
-            <param name="fileName">Nome (completo di percorso) del file da controllare</param>
-            <param name="fileContent">Contenuto da controllare per far scattare il semaforo; vuoto scatta a qualunque contenuto</param>
-            <param name="syncObject">Oggetto per la la syncronizzaione del crossthreading</param>
-            <param name="deleteFileAfterProcess">Cancella il file semafoto quando processato</param>
+            <param name="fileName">Filename that will be check</param>
+            <param name="fileContent">File content that will be match to unlock the semaphore. Empty string allow to unlock the semaphore with any content.</param>
+            <param name="syncObject">Object to use to invoke event in threadsafe</param>
+            <param name="deleteFileAfterProcess">Delete file when semaphore is unlocked</param>
         </member>
         <member name="M:System.Threading.FileSemaphore.Start">
             <summary>
-            Avvio il controllo del semaforo
+            Start semaphore checking
             </summary>
         </member>
         <member name="M:System.Threading.FileSemaphore.Stop">
             <summary>
-            Ferma il controllo del semaforo
+            Stop semaphore checking
             </summary>
         </member>
         <member name="E:System.Threading.FileSemaphore.UnLocked">
             <summary>
-            Evento che viene lanciato quando le condizioni del semaforo si verificano
+            Event that is fire when the semaphore condition is verified
             </summary>
         </member>
         <member name="M:System.Threading.FileSemaphore.Dispose(System.Boolean)">
             <summary>
-            Dispose dell'oggetto semaforo
+            Dispose of the semaphore
             </summary>
             <param name="disposing"></param>
         </member>
@@ -46,32 +46,32 @@
         </member>
         <member name="T:System.Threading.FileSemaphoreEventArgs">
             <summary>
-            Contiene le informazioni che hanno fatto scattare il semaforo
+            Contains information about filesemaphore unlock event
             </summary>
         </member>
         <member name="P:System.Threading.FileSemaphoreEventArgs.Content">
             <summary>
-            Contenuto letto dal file semaforo
+            Content of the file that has unlocked the semaphore
             </summary>
         </member>
         <member name="P:System.Threading.FileSemaphoreEventArgs.Filename">
             <summary>
-            Nome del file che ha fatto scattare il semaforo
+            Filename that has unlocked the semaphore
             </summary>
         </member>
         <member name="M:System.Threading.FileSemaphoreEventArgs.#ctor(System.String,System.String)">
             <summary>
-            Costruisce un oggetto FileSemaphoreEventArgs
+            Create a FileSemaphoreEventArgs object
             </summary>
-            <param name="filename">Nome del file che ha fatto scattare il semaforo</param>
-            <param name="content">Contenuto letto dal file semaforo</param>
+            <param name="filename">Filename that has unlocked the semaphore</param>
+            <param name="content">Content of the file that has unlocked the semaphore</param>
         </member>
         <member name="T:System.Threading.FileSemaphoreEventHandler">
             <summary>
-            Delegato per lachio evento semaforo
+            Delegate usend for firing Unlocked event
             </summary>
-            <param name="sender">Oggetto che lancia l'evento</param>
-            <param name="eventArgs">Contene il Content e il Filename relativo all'evento</param>
+            <param name="sender">Object that has fired the event</param>
+            <param name="eventArgs">Information about the Unlocked event (filename, content)</param>
         </member>
     </members>
 </doc>
