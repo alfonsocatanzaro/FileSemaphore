@@ -2,6 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>System.Threading</RootNamespace>
   </PropertyGroup>
+
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>$(MSBuildProjectDirectory)\..\FileSemaphore.xml</DocumentationFile>
+		<DocumentationMarkdown>$(MSBuildProjectDirectory)\..\FileSemaphore.md</DocumentationMarkdown>
+		<VsxmdAutoDeleteXml>False</VsxmdAutoDeleteXml>
+	</PropertyGroup>
+
+	<ItemGroup>
+    <PackageReference Include="Vsxmd" Version="1.4.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
 </Project>

@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FileSemaphore</name>
+    </assembly>
+    <members>
+        <member name="T:System.Threading.FileSemaphore">
+            <summary>
+            Consente di creare un semaforo basato su file
+            </summary>
+        </member>
+        <member name="M:System.Threading.FileSemaphore.#ctor(System.String,System.String,System.ComponentModel.ISynchronizeInvoke,System.Boolean)">
+            <summary>
+            Crea un oggetto FileSemaphore
+            </summary>
+            <param name="fileName">Nome (completo di percorso) del file da controllare</param>
+            <param name="fileContent">Contenuto da controllare per far scattare il semaforo; vuoto scatta a qualunque contenuto</param>
+            <param name="syncObject">Oggetto per la la syncronizzaione del crossthreading</param>
+            <param name="deleteFileAfterProcess">Cancella il file semafoto quando processato</param>
+        </member>
+        <member name="M:System.Threading.FileSemaphore.Start">
+            <summary>
+            Avvio il controllo del semaforo
+            </summary>
+        </member>
+        <member name="M:System.Threading.FileSemaphore.Stop">
+            <summary>
+            Ferma il controllo del semaforo
+            </summary>
+        </member>
+        <member name="E:System.Threading.FileSemaphore.UnLocked">
+            <summary>
+            Evento che viene lanciato quando le condizioni del semaforo si verificano
+            </summary>
+        </member>
+        <member name="M:System.Threading.FileSemaphore.Dispose(System.Boolean)">
+            <summary>
+            Dispose dell'oggetto semaforo
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:System.Threading.FileSemaphore.Dispose">
+            <summary>
+            Dispose
+            </summary>
+        </member>
+        <member name="T:System.Threading.FileSemaphoreEventArgs">
+            <summary>
+            Contiene le informazioni che hanno fatto scattare il semaforo
+            </summary>
+        </member>
+        <member name="P:System.Threading.FileSemaphoreEventArgs.Content">
+            <summary>
+            Contenuto letto dal file semaforo
+            </summary>
+        </member>
+        <member name="P:System.Threading.FileSemaphoreEventArgs.Filename">
+            <summary>
+            Nome del file che ha fatto scattare il semaforo
+            </summary>
+        </member>
+        <member name="M:System.Threading.FileSemaphoreEventArgs.#ctor(System.String,System.String)">
+            <summary>
+            Costruisce un oggetto FileSemaphoreEventArgs
+            </summary>
+            <param name="filename">Nome del file che ha fatto scattare il semaforo</param>
+            <param name="content">Contenuto letto dal file semaforo</param>
+        </member>
+        <member name="T:System.Threading.FileSemaphoreEventHandler">
+            <summary>
+            Delegato per lachio evento semaforo
+            </summary>
+            <param name="sender">Oggetto che lancia l'evento</param>
+            <param name="eventArgs">Contene il Content e il Filename relativo all'evento</param>
+        </member>
+    </members>
+</doc>

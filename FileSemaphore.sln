@@ -3,11 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSemaphore.Sample", "FileSemaphoreSample\FileSemaphoreSample.csproj", "{1F06AC76-1806-46BA-8B72-1091EDCA25B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSemaphoreSample", "FileSemaphoreSample\FileSemaphoreSample.csproj", "{1F06AC76-1806-46BA-8B72-1091EDCA25B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSemaphore", "FileSemaphore\FileSemaphore.csproj", "{885DE2F3-32C7-4CBC-B866-F7DF6E3A8065}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSemaphore", "FileSemaphore\FileSemaphore.csproj", "{885DE2F3-32C7-4CBC-B866-F7DF6E3A8065}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSemaphore.Tests", "FileSemaphoreTests\FileSemaphoreTests.csproj", "{D151F7EA-5EBE-4BE9-BE2B-11ED9EC0BC39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSemaphoreTests", "FileSemaphoreTests\FileSemaphoreTests.csproj", "{D151F7EA-5EBE-4BE9-BE2B-11ED9EC0BC39}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{25AFC1ED-E143-44B1-9D35-46FA3F1E656A}"
+	ProjectSection(SolutionItems) = preProject
+		FileSemaphore.md = FileSemaphore.md
+		FileSemaphore.xml = FileSemaphore.xml
+		readme.md = readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
