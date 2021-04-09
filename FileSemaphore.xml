@@ -18,6 +18,35 @@
             <param name="syncObject">Object to use to invoke event in threadsafe</param>
             <param name="deleteFileAfterProcess">Delete file when semaphore is unlocked</param>
         </member>
+        <member name="M:System.Threading.FileSemaphore.WaitForUnlock(System.Int32,System.Threading.FileSemaphoreEventArgs@)">
+            <summary>
+            Stop current thread and wait for a unlocked event or timeout
+            </summary>
+            <param name="timeout">Timeout in milliseconds</param>
+            <param name="eventArgs">Contains unlocked semaphore information if unlocked, null if timeout is reached</param>
+            <returns>true if an unlocked event has reacher, false when timeout</returns>
+        </member>
+        <member name="M:System.Threading.FileSemaphore.WaitForUnlock(System.TimeSpan,System.Threading.FileSemaphoreEventArgs@)">
+            <summary>
+            Stop current thread and wait for a unlocked event or timeout
+            </summary>
+            <param name="timeout">Timeout timespan</param>
+            <param name="eventArgs">Contains unlocked semaphore information if unlocked, null if timeout is reached</param>
+            <returns>true if an unlocked event has reacher, false when timeout</returns>
+        </member>
+        <member name="M:System.Threading.FileSemaphore.WaitForUnlock(System.Threading.FileSemaphoreEventArgs@)">
+            <summary>
+            Stop current thread and wait for a unlocked event or timeout
+            </summary>
+            <param name="eventArgs">Contains unlocked semaphore information if unlocked, null if timeout is reached</param>
+            <returns>true if an unlocked event has reacher, false when timeout</returns>
+        </member>
+        <member name="M:System.Threading.FileSemaphore.WaitForUnlock">
+            <summary>
+            Stop current thread and wait for a unlocked event or timeout
+            </summary>
+            <returns>true if an unlocked event has reacher, false when timeout (never in this case)</returns>
+        </member>
         <member name="M:System.Threading.FileSemaphore.Start">
             <summary>
             Start semaphore checking

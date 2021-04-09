@@ -9,6 +9,10 @@
   - [Dispose()](#M-System-Threading-FileSemaphore-Dispose 'System.Threading.FileSemaphore.Dispose')
   - [Start()](#M-System-Threading-FileSemaphore-Start 'System.Threading.FileSemaphore.Start')
   - [Stop()](#M-System-Threading-FileSemaphore-Stop 'System.Threading.FileSemaphore.Stop')
+  - [WaitForUnlock(timeout,eventArgs)](#M-System-Threading-FileSemaphore-WaitForUnlock-System-Int32,System-Threading-FileSemaphoreEventArgs@- 'System.Threading.FileSemaphore.WaitForUnlock(System.Int32,System.Threading.FileSemaphoreEventArgs@)')
+  - [WaitForUnlock(timeout,eventArgs)](#M-System-Threading-FileSemaphore-WaitForUnlock-System-TimeSpan,System-Threading-FileSemaphoreEventArgs@- 'System.Threading.FileSemaphore.WaitForUnlock(System.TimeSpan,System.Threading.FileSemaphoreEventArgs@)')
+  - [WaitForUnlock(eventArgs)](#M-System-Threading-FileSemaphore-WaitForUnlock-System-Threading-FileSemaphoreEventArgs@- 'System.Threading.FileSemaphore.WaitForUnlock(System.Threading.FileSemaphoreEventArgs@)')
+  - [WaitForUnlock()](#M-System-Threading-FileSemaphore-WaitForUnlock 'System.Threading.FileSemaphore.WaitForUnlock')
 - [FileSemaphoreEventArgs](#T-System-Threading-FileSemaphoreEventArgs 'System.Threading.FileSemaphoreEventArgs')
   - [#ctor(filename,content)](#M-System-Threading-FileSemaphoreEventArgs-#ctor-System-String,System-String- 'System.Threading.FileSemaphoreEventArgs.#ctor(System.String,System.String)')
   - [Content](#P-System-Threading-FileSemaphoreEventArgs-Content 'System.Threading.FileSemaphoreEventArgs.Content')
@@ -83,6 +87,74 @@ This method has no parameters.
 ##### Summary
 
 Stop semaphore checking
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-System-Threading-FileSemaphore-WaitForUnlock-System-Int32,System-Threading-FileSemaphoreEventArgs@-'></a>
+### WaitForUnlock(timeout,eventArgs) `method`
+
+##### Summary
+
+Stop current thread and wait for a unlocked event or timeout
+
+##### Returns
+
+true if an unlocked event has reacher, false when timeout
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| timeout | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Timeout in milliseconds |
+| eventArgs | [System.Threading.FileSemaphoreEventArgs@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Threading.FileSemaphoreEventArgs@ 'System.Threading.FileSemaphoreEventArgs@') | Contains unlocked semaphore information if unlocked, null if timeout is reached |
+
+<a name='M-System-Threading-FileSemaphore-WaitForUnlock-System-TimeSpan,System-Threading-FileSemaphoreEventArgs@-'></a>
+### WaitForUnlock(timeout,eventArgs) `method`
+
+##### Summary
+
+Stop current thread and wait for a unlocked event or timeout
+
+##### Returns
+
+true if an unlocked event has reacher, false when timeout
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| timeout | [System.TimeSpan](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.TimeSpan 'System.TimeSpan') | Timeout timespan |
+| eventArgs | [System.Threading.FileSemaphoreEventArgs@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Threading.FileSemaphoreEventArgs@ 'System.Threading.FileSemaphoreEventArgs@') | Contains unlocked semaphore information if unlocked, null if timeout is reached |
+
+<a name='M-System-Threading-FileSemaphore-WaitForUnlock-System-Threading-FileSemaphoreEventArgs@-'></a>
+### WaitForUnlock(eventArgs) `method`
+
+##### Summary
+
+Stop current thread and wait for a unlocked event or timeout
+
+##### Returns
+
+true if an unlocked event has reacher, false when timeout
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| eventArgs | [System.Threading.FileSemaphoreEventArgs@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Threading.FileSemaphoreEventArgs@ 'System.Threading.FileSemaphoreEventArgs@') | Contains unlocked semaphore information if unlocked, null if timeout is reached |
+
+<a name='M-System-Threading-FileSemaphore-WaitForUnlock'></a>
+### WaitForUnlock() `method`
+
+##### Summary
+
+Stop current thread and wait for a unlocked event or timeout
+
+##### Returns
+
+true if an unlocked event has reacher, false when timeout (never in this case)
 
 ##### Parameters
 
