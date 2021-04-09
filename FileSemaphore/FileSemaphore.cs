@@ -36,10 +36,21 @@ namespace System.Threading
             ISynchronizeInvoke syncObject = null,
             bool deleteFileAfterProcess = false)
         {
-            this._fileName = fileName;
-            this._fileContent = fileContent;
-            this._syncObject = syncObject;
-            this._deleteFileAfterProcess = deleteFileAfterProcess;
+            _fileName = fileName;
+            _fileContent = fileContent;
+            _syncObject = syncObject;
+            _deleteFileAfterProcess = deleteFileAfterProcess;
+
+            EnsureFullPathFilename(ref _fileName);
+        }
+
+        private void EnsureFullPathFilename(ref string filename)
+        {
+            if (!filename.Contains(Path.DirectorySeparatorChar) &&
+                !filename.Contains(Path.AltDirectorySeparatorChar))
+            {
+                filename = Path.Combine(Directory.GetCurrentDirectory(), filename);
+            }
         }
 
         /// <summary>
