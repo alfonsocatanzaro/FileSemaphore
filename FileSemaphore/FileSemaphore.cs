@@ -14,6 +14,27 @@ namespace System.Threading
     public class FileSemaphore : IDisposable
     {
         private readonly int READ_FILE_MAX_ATTEMPT = 5;
+
+        //public bool WaitForUnlock(TimeSpan timeout,out FileSemaphoreEventArgs eventArgs)
+        //{
+        //    return WaitForUnlock((int)timeout.TotalMilliseconds, out eventArgs);
+        //}
+
+        //public bool WaitForUnlock(int timeout, out FileSemaphoreEventArgs eventArgs)
+        //{
+
+        //}
+
+        //public bool WaitForUnlock(out FileSemaphoreEventArgs eventArgs)
+        //{
+        //    return WaitForUnlock(0, out eventArgs);
+        //}
+
+        //public bool WaitForUnlock()
+        //{
+        //    return WaitForUnlock(out FileSemaphoreEventArgs _);
+        //}
+
         private readonly int READ_FILE_ATTEMPT_DELAY = 50;
         private readonly int DELETE_FILE_MAX_ATTEMPT = 5;
         private readonly int DELETE_FILE_ATTEMPT_DELAY = 50;
