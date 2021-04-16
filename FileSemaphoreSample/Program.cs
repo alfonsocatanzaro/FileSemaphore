@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 namespace FileSemaphoreSample {
     class Program {
         static void Main (string[] args) {
+            EventSample ();
+            Console.WriteLine ("--------------------------");
+            WaitForUnlockSample ();
+        }
+
+        private static void EventSample () {
             EventWaitHandle wh = new ManualResetEvent (false);
             // this task wait for the semaphore
             Task t1 = Task.Run (() => {
@@ -34,9 +40,9 @@ namespace FileSemaphoreSample {
 
             Task.WaitAll (t1, t2);
             Console.WriteLine ("mainthread: end");
+        }
 
-            Console.WriteLine ("--------------------------");
-
+        private static void WaitForUnlockSample () {
             string semFile = Path.Combine (Directory.GetCurrentDirectory (), "semaphore4.sem");
             string content = "specific content";
             if (File.Exists (semFile)) File.Delete (semFile);
@@ -52,7 +58,6 @@ namespace FileSemaphoreSample {
             Console.WriteLine ($"Ok       = {ok}");
             Console.WriteLine ($"Filename = {eventArgs.Filename}");
             Console.WriteLine ($"Content  = {eventArgs.Content}");
-
         }
     }
 }
