@@ -13,7 +13,7 @@ namespace FileSemaphoreTests {
         [InlineData ("prefix*postfix.ext", "prefix123postfix.ext")]
         [InlineData ("test?test.???", "test_test.aaa")]
         public void ShouldMatch (string pattern, string filename) {
-            WilcardFileNameComparer wc = new WilcardFileNameComparer (pattern);
+            WildcardFileNameComparer wc = new WildcardFileNameComparer (pattern);
             Assert.True (wc.IsMatch (filename));
         }
 
@@ -23,7 +23,7 @@ namespace FileSemaphoreTests {
         [InlineData ("*postfix.ext", "123postsfix.ext")]
         [InlineData ("test?test.???", "testtest.aaa")]
         public void ShouldntMatch (string pattern, string filename) {
-            WilcardFileNameComparer wc = new WilcardFileNameComparer (pattern);
+            WildcardFileNameComparer wc = new WildcardFileNameComparer (pattern);
             Assert.False (wc.IsMatch (filename));
         }
     }

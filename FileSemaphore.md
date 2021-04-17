@@ -4,7 +4,7 @@
 ## Contents
 
 - [FileSemaphore](#T-System-Threading-FileSemaphore 'System.Threading.FileSemaphore')
-  - [#ctor(fileName,fileContent,syncObject,deleteFileAfterProcess)](#M-System-Threading-FileSemaphore-#ctor-System-String,System-String,System-ComponentModel-ISynchronizeInvoke,System-Boolean- 'System.Threading.FileSemaphore.#ctor(System.String,System.String,System.ComponentModel.ISynchronizeInvoke,System.Boolean)')
+  - [#ctor(fileName,folder,fileContent,syncObject,deleteFileAfterProcess)](#M-System-Threading-FileSemaphore-#ctor-System-String,System-String,System-String,System-ComponentModel-ISynchronizeInvoke,System-Boolean- 'System.Threading.FileSemaphore.#ctor(System.String,System.String,System.String,System.ComponentModel.ISynchronizeInvoke,System.Boolean)')
   - [Dispose(disposing)](#M-System-Threading-FileSemaphore-Dispose-System-Boolean- 'System.Threading.FileSemaphore.Dispose(System.Boolean)')
   - [Dispose()](#M-System-Threading-FileSemaphore-Dispose 'System.Threading.FileSemaphore.Dispose')
   - [Start()](#M-System-Threading-FileSemaphore-Start 'System.Threading.FileSemaphore.Start')
@@ -18,6 +18,9 @@
   - [Content](#P-System-Threading-FileSemaphoreEventArgs-Content 'System.Threading.FileSemaphoreEventArgs.Content')
   - [Filename](#P-System-Threading-FileSemaphoreEventArgs-Filename 'System.Threading.FileSemaphoreEventArgs.Filename')
 - [FileSemaphoreEventHandler](#T-System-Threading-FileSemaphoreEventHandler 'System.Threading.FileSemaphoreEventHandler')
+- [WildcardFileNameComparer](#T-System-Threading-WildcardFileNameComparer 'System.Threading.WildcardFileNameComparer')
+  - [#ctor(pattern)](#M-System-Threading-WildcardFileNameComparer-#ctor-System-String- 'System.Threading.WildcardFileNameComparer.#ctor(System.String)')
+  - [IsMatch(filename)](#M-System-Threading-WildcardFileNameComparer-IsMatch-System-String- 'System.Threading.WildcardFileNameComparer.IsMatch(System.String)')
 
 <a name='T-System-Threading-FileSemaphore'></a>
 ## FileSemaphore `type`
@@ -30,8 +33,8 @@ System.Threading
 
 FileSemaphore class allow you to create a process semaphore that unlock on file event.
 
-<a name='M-System-Threading-FileSemaphore-#ctor-System-String,System-String,System-ComponentModel-ISynchronizeInvoke,System-Boolean-'></a>
-### #ctor(fileName,fileContent,syncObject,deleteFileAfterProcess) `constructor`
+<a name='M-System-Threading-FileSemaphore-#ctor-System-String,System-String,System-String,System-ComponentModel-ISynchronizeInvoke,System-Boolean-'></a>
+### #ctor(fileName,folder,fileContent,syncObject,deleteFileAfterProcess) `constructor`
 
 ##### Summary
 
@@ -41,9 +44,10 @@ Create an FileSemaphore class instance
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| fileName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Filename that will be check |
+| fileName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Filename that will be check, you can use wildcards ('?' and '*' chars) |
+| folder | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Working folder where check for file |
 | fileContent | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | File content that will be match to unlock the semaphore. Empty string allow to unlock the semaphore with any content. |
-| syncObject | [System.ComponentModel.ISynchronizeInvoke](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.ISynchronizeInvoke 'System.ComponentModel.ISynchronizeInvoke') | Object to use to invoke event in threadsafe |
+| syncObject | [System.ComponentModel.ISynchronizeInvoke](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.ISynchronizeInvoke 'System.ComponentModel.ISynchronizeInvoke') | Object to use to invoke event in thread-safe |
 | deleteFileAfterProcess | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Delete file when semaphore is unlocked |
 
 <a name='M-System-Threading-FileSemaphore-Dispose-System-Boolean-'></a>
@@ -215,3 +219,44 @@ Delegate usend for firing Unlocked event
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [T:System.Threading.FileSemaphoreEventHandler](#T-T-System-Threading-FileSemaphoreEventHandler 'T:System.Threading.FileSemaphoreEventHandler') | Object that has fired the event |
+
+<a name='T-System-Threading-WildcardFileNameComparer'></a>
+## WildcardFileNameComparer `type`
+
+##### Namespace
+
+System.Threading
+
+##### Summary
+
+Provide a wildcard pattern matching for file names
+
+<a name='M-System-Threading-WildcardFileNameComparer-#ctor-System-String-'></a>
+### #ctor(pattern) `constructor`
+
+##### Summary
+
+Create an instance of [WildcardFileNameComparer](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Threading.WildcardFileNameComparer 'System.Threading.WildcardFileNameComparer')
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| pattern | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | File pattern with wildcard |
+
+<a name='M-System-Threading-WildcardFileNameComparer-IsMatch-System-String-'></a>
+### IsMatch(filename) `method`
+
+##### Summary
+
+Check if file name match with the pattern
+
+##### Returns
+
+True if file name match with the pattern
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| filename | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | File name to check |

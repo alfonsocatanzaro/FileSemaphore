@@ -13,10 +13,10 @@
             <summary>
             Create an FileSemaphore class instance
             </summary>
-            <param name="fileName">Filename that will be check, you can use wilcards ('?' and '*' chars)</param>
+            <param name="fileName">Filename that will be check, you can use wildcards ('?' and '*' chars)</param>
             <param name="folder">Working folder where check for file</param>
             <param name="fileContent">File content that will be match to unlock the semaphore. Empty string allow to unlock the semaphore with any content.</param>
-            <param name="syncObject">Object to use to invoke event in threadsafe</param>
+            <param name="syncObject">Object to use to invoke event in thread-safe</param>
             <param name="deleteFileAfterProcess">Delete file when semaphore is unlocked</param>
         </member>
         <member name="M:System.Threading.FileSemaphore.WaitForUnlock(System.Int32,System.Threading.FileSemaphoreEventArgs@)">
@@ -102,6 +102,24 @@
             </summary>
             <param name="sender">Object that has fired the event</param>
             <param name="eventArgs">Information about the Unlocked event (filename, content)</param>
+        </member>
+        <member name="T:System.Threading.WildcardFileNameComparer">
+            <summary>
+            Provide a wildcard pattern matching for file names
+            </summary>
+        </member>
+        <member name="M:System.Threading.WildcardFileNameComparer.#ctor(System.String)">
+            <summary>
+            Create an instance of <see cref="T:System.Threading.WildcardFileNameComparer"/>
+            </summary>
+            <param name="pattern">File pattern with wildcard</param>
+        </member>
+        <member name="M:System.Threading.WildcardFileNameComparer.IsMatch(System.String)">
+            <summary>
+            Check if file name match with the pattern
+            </summary>
+            <param name="filename">File name to check</param>
+            <returns>True if file name match with the pattern</returns>
         </member>
     </members>
 </doc>

@@ -24,15 +24,15 @@ namespace System.Threading {
         private readonly ISynchronizeInvoke _syncObject;
         private readonly bool _deleteFileAfterProcess;
 
-        private readonly WilcardFileNameComparer _wilcardFileNameComparer;
+        private readonly WildcardFileNameComparer _wilcardFileNameComparer;
 
         /// <summary>
         /// Create an FileSemaphore class instance
         /// </summary>
-        /// <param name="fileName">Filename that will be check, you can use wilcards ('?' and '*' chars)</param>
+        /// <param name="fileName">Filename that will be check, you can use wildcards ('?' and '*' chars)</param>
         /// <param name="folder">Working folder where check for file</param>
         /// <param name="fileContent">File content that will be match to unlock the semaphore. Empty string allow to unlock the semaphore with any content.</param>
-        /// <param name="syncObject">Object to use to invoke event in threadsafe</param>
+        /// <param name="syncObject">Object to use to invoke event in thread-safe</param>
         /// <param name="deleteFileAfterProcess">Delete file when semaphore is unlocked</param>
         public FileSemaphore (string fileName,
             string fileContent = "",
@@ -45,7 +45,7 @@ namespace System.Threading {
             _syncObject = syncObject;
             _deleteFileAfterProcess = deleteFileAfterProcess;
             _filterIsPresent = _fileName.Contains ('?') || _fileName.Contains ('*');
-            _wilcardFileNameComparer = new WilcardFileNameComparer (fileName);
+            _wilcardFileNameComparer = new WildcardFileNameComparer (fileName);
         }
 
         /// <summary>
@@ -59,10 +59,11 @@ namespace System.Threading {
             this.Start ();
             EventWaitHandle waitHandle = new ManualResetEvent (false);
             FileSemaphoreEventArgs capturedEventArgs = null;
-            FileSemaphoreEventHandler handler = (s, e) => {
-                waitHandle.Set ();
+            void handler(object s, FileSemaphoreEventArgs e)
+            {
                 capturedEventArgs = e;
-            };
+                waitHandle.Set();
+            }
             this.UnLocked += handler;
             bool ok = waitHandle.WaitOne (timeout);
             eventArgs = ok ? capturedEventArgs : null;
@@ -123,17 +124,18 @@ namespace System.Threading {
         }
 
         private void InitfileSystemWatcher () {
-            _fileSystemWatcher = new FileSystemWatcher (
+            _fileSystemWatcher = new FileSystemWatcher(
                 _folder,
                 _filterIsPresent ? "*.*" : _fileName
-            );
-
-            _fileSystemWatcher.NotifyFilter =
+            )
+            {
+                NotifyFilter =
                 NotifyFilters.LastWrite |
                 NotifyFilters.CreationTime |
                 NotifyFilters.FileName |
                 NotifyFilters.DirectoryName |
-                NotifyFilters.Size;
+                NotifyFilters.Size
+            };
 
             _fileSystemWatcher.Created += HandleFile;
             _fileSystemWatcher.Renamed += HandleFile;
@@ -147,13 +149,13 @@ namespace System.Threading {
         private void HandleFile (object sender, FileSystemEventArgs e) {
             if (_filterIsPresent && (false == _wilcardFileNameComparer.IsMatch (e.Name)))
                 return;
-            if (false == TryReadAllText (_fileName, out string content)) return;
+            if (false == TryReadAllText (e.FullPath, out string content)) return;
             if (_fileContent != content && (false == string.IsNullOrEmpty (_fileContent))) return;
 
             if (_deleteFileAfterProcess)
                 TryDeleteFile (_fileName);
 
-            OnUnLocked (Path.GetFileName (_fileName), content);
+            OnUnLocked (e.Name, content);
         }
 
         private bool TryReadAllText (string fileName, out string fileContent) {
