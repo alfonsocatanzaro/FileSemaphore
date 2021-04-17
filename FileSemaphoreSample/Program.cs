@@ -9,14 +9,17 @@ namespace FileSemaphoreSample {
             EventSample ();
             Console.WriteLine ("--------------------------");
             WaitForUnlockSample ();
+            Console.ReadLine();
         }
 
         private static void EventSample () {
             EventWaitHandle wh = new ManualResetEvent (false);
             // this task wait for the semaphore
             Task t1 = Task.Run (() => {
-                File.Delete ("semaphore.sem");
-                FileSemaphore fs = new FileSemaphore ("semaphore.sem");
+                File.Delete ("semaphore000.sem");
+                File.Delete ("semaphoreAAA.sem");
+                File.Delete ("Another.sem");
+                FileSemaphore fs = new("semaphore???.sem");
                 fs.Start ();
                 fs.UnLocked += (s, e) => {
                     Console.WriteLine ($"t1: semaphore is unlocked with {e.Filename} with '{e.Content}' as content.");
@@ -29,8 +32,10 @@ namespace FileSemaphoreSample {
                 Console.WriteLine ("t2: starting");
                 Thread.Sleep (2000);
                 Console.WriteLine ("t2: writing file");
-                File.WriteAllText ("semaphore.sem", "hello semaphore!");
-                Console.WriteLine ("t2: file written, end");
+                File.WriteAllText ("semaphore000.sem", "hello semaphore000!");
+                File.WriteAllText("semaphoreAAA.sem", "hello semaphoreAAA!");
+                File.WriteAllText("Another.sem", "this file doesn't catch");
+                Console.WriteLine ("t2: files written, end");
             });
 
             Console.WriteLine ("mainthread: tasks launched, waiting");
@@ -43,21 +48,23 @@ namespace FileSemaphoreSample {
         }
 
         private static void WaitForUnlockSample () {
-            string semFile = Path.Combine (Directory.GetCurrentDirectory (), "semaphore4.sem");
+            string semFile =  "semaphore4.sem";
             string content = "specific content";
             if (File.Exists (semFile)) File.Delete (semFile);
-            FileSemaphore fs = new FileSemaphore (semFile, content);
+            FileSemaphore fs = new(semFile, content);
             Task.Run (() => {
                 Console.WriteLine ("Starting writer task");
                 Thread.Sleep (2500);
                 File.WriteAllText (semFile, content);
                 Console.WriteLine ("Writer task has finish");
             });
-            Console.WriteLine ("Wait for the semafore");
+            Console.WriteLine ("Wait for the semaphore");
             bool ok = fs.WaitForUnlock (5000, out FileSemaphoreEventArgs eventArgs);
             Console.WriteLine ($"Ok       = {ok}");
             Console.WriteLine ($"Filename = {eventArgs.Filename}");
             Console.WriteLine ($"Content  = {eventArgs.Content}");
         }
+
+
     }
 }
