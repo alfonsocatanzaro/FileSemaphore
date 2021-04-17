@@ -9,11 +9,12 @@
             FileSemaphore class allow you to create a process semaphore that unlock on file event.
             </summary>
         </member>
-        <member name="M:System.Threading.FileSemaphore.#ctor(System.String,System.String,System.ComponentModel.ISynchronizeInvoke,System.Boolean)">
+        <member name="M:System.Threading.FileSemaphore.#ctor(System.String,System.String,System.String,System.ComponentModel.ISynchronizeInvoke,System.Boolean)">
             <summary>
             Create an FileSemaphore class instance
             </summary>
-            <param name="fileName">Filename that will be check</param>
+            <param name="fileName">Filename that will be check, you can use wilcards ('?' and '*' chars)</param>
+            <param name="folder">Working folder where check for file</param>
             <param name="fileContent">File content that will be match to unlock the semaphore. Empty string allow to unlock the semaphore with any content.</param>
             <param name="syncObject">Object to use to invoke event in threadsafe</param>
             <param name="deleteFileAfterProcess">Delete file when semaphore is unlocked</param>

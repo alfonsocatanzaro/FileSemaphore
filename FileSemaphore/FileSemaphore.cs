@@ -17,35 +17,35 @@ namespace System.Threading {
         private readonly int DELETE_FILE_ATTEMPT_DELAY = 50;
 
         private readonly string _fileName;
+        private readonly string _folder;
+        private readonly bool _filterIsPresent;
         private readonly string _fileContent;
         private FileSystemWatcher _fileSystemWatcher;
         private readonly ISynchronizeInvoke _syncObject;
         private readonly bool _deleteFileAfterProcess;
 
+        private readonly WilcardFileNameComparer _wilcardFileNameComparer;
+
         /// <summary>
         /// Create an FileSemaphore class instance
         /// </summary>
-        /// <param name="fileName">Filename that will be check</param>
+        /// <param name="fileName">Filename that will be check, you can use wilcards ('?' and '*' chars)</param>
+        /// <param name="folder">Working folder where check for file</param>
         /// <param name="fileContent">File content that will be match to unlock the semaphore. Empty string allow to unlock the semaphore with any content.</param>
         /// <param name="syncObject">Object to use to invoke event in threadsafe</param>
         /// <param name="deleteFileAfterProcess">Delete file when semaphore is unlocked</param>
         public FileSemaphore (string fileName,
             string fileContent = "",
+            string folder = "",
             ISynchronizeInvoke syncObject = null,
             bool deleteFileAfterProcess = false) {
             _fileName = fileName;
+            _folder = string.IsNullOrEmpty (folder) ? Directory.GetCurrentDirectory () : folder;
             _fileContent = fileContent;
             _syncObject = syncObject;
             _deleteFileAfterProcess = deleteFileAfterProcess;
-
-            EnsureFullPathFilename (ref _fileName);
-        }
-
-        private void EnsureFullPathFilename (ref string filename) {
-            if (!filename.Contains (Path.DirectorySeparatorChar) &&
-                !filename.Contains (Path.AltDirectorySeparatorChar)) {
-                filename = Path.Combine (Directory.GetCurrentDirectory (), filename);
-            }
+            _filterIsPresent = _fileName.Contains ('?') || _fileName.Contains ('*');
+            _wilcardFileNameComparer = new WilcardFileNameComparer (fileName);
         }
 
         /// <summary>
@@ -124,8 +124,8 @@ namespace System.Threading {
 
         private void InitfileSystemWatcher () {
             _fileSystemWatcher = new FileSystemWatcher (
-                Path.GetDirectoryName (_fileName),
-                Path.GetFileName (_fileName)
+                _folder,
+                _filterIsPresent ? "*.*" : _fileName
             );
 
             _fileSystemWatcher.NotifyFilter =
@@ -145,14 +145,15 @@ namespace System.Threading {
         }
 
         private void HandleFile (object sender, FileSystemEventArgs e) {
-
+            if (_filterIsPresent && (false == _wilcardFileNameComparer.IsMatch (e.Name)))
+                return;
             if (false == TryReadAllText (_fileName, out string content)) return;
-            if (_fileContent != content && !string.IsNullOrEmpty (_fileContent)) return;
+            if (_fileContent != content && (false == string.IsNullOrEmpty (_fileContent))) return;
 
             if (_deleteFileAfterProcess)
                 TryDeleteFile (_fileName);
 
-            OnUnLocked (_fileName, content);
+            OnUnLocked (Path.GetFileName (_fileName), content);
         }
 
         private bool TryReadAllText (string fileName, out string fileContent) {
