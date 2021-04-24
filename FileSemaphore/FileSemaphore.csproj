@@ -3,6 +3,18 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<RootNamespace>System.Threading</RootNamespace>
+		<PackageId>FileSemaphore</PackageId>
+		<Authors>Alfonso Catanzaro</Authors>
+		<Product />
+		<Description>FileSemaphore class allow us to pause program execution and wait for a file appear in a given folder with a given name and eventually with a given content.
+</Description>
+		<Copyright>2021 Alfonso Catanzaro</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/alfonsocatanzaro/FileSemaphore</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/alfonsocatanzaro/FileSemaphore</RepositoryUrl>
+		<RepositoryType>GIT</RepositoryType>
+		<PackageTags>Thread Threading Semaphore File Wait Waitforfile</PackageTags>
+		<PackageIcon>288px-Semaphore_Kilo.svg.png</PackageIcon>
 	</PropertyGroup>
 
 
@@ -17,6 +29,13 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\288px-Semaphore_Kilo.svg.png">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+	  </None>
 	</ItemGroup>
 
 </Project>
